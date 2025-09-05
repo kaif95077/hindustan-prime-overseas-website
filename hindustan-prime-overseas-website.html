@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindustan Prime Overseas - Your Trusted Partner in Global Trade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e2e8f0;
+        }
+        .hero-bg {
+            background-color: #0a0a0a;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+            background-size: 2rem 2rem;
+        }
+        .section-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.1), transparent 50%);
+        }
+        .card-glow {
+             background: radial-gradient(circle at 50% 100%, rgba(139, 92, 246, 0.15), transparent 40%);
+             border: 1px solid rgba(255, 255, 255, 0.1);
+             transition: all 0.3s ease;
+        }
+        .card-glow:hover {
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.1);
+        }
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .contact-link {
+            transition: color 0.3s;
+        }
+        .contact-link:hover {
+            color: #a78bfa;
+        }
+        #globe-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        #trade-canvas {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 600 / 400;
+            min-height: 400px;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-lg border-b border-slate-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-400"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/><path d="M12 12 8 22s4-4 4-10"/><path d="M12 12 16 22s-4-4-4-10"/><path d="m14 6-4 4"/></svg>
+                HINDUSTAN PRIME OVERSEAS
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="text-slate-300 hover:text-violet-400 transition-colors duration-300">About</a>
+                <a href="#products" class="text-slate-300 hover:text-violet-400 transition-colors duration-300">Products</a>
+                <a href="#why-us" class="text-slate-300 hover:text-violet-400 transition-colors duration-300">Why Us</a>
+                <a href="#contact" class="text-slate-300 hover:text-violet-400 transition-colors duration-300">Contact</a>
+            </nav>
+            <a href="#contact" class="hidden md:block bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300">Get In Touch</a>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-slate-300 hover:text-violet-400">About</a>
+            <a href="#products" class="block py-2 text-slate-300 hover:text-violet-400">Products</a>
+            <a href="#why-us" class="block py-2 text-slate-300 hover:text-violet-400">Why Us</a>
+            <a href="#contact" class="block py-2 text-slate-300 hover:text-violet-400">Contact</a>
+            <a href="#contact" class="block mt-2 bg-violet-600 hover:bg-violet-700 text-white text-center font-medium py-2 px-4 rounded-lg">Get In Touch</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden hero-bg section-glow pt-24 pb-12">
+            <canvas id="globe-canvas"></canvas>
+            <div class="relative z-10 container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 scroll-animate">
+                    HINDUSTAN PRIME OVERSEAS
+                </h1>
+                <p class="text-2xl md:text-3xl text-violet-400 font-medium max-w-3xl mx-auto mb-8 scroll-animate" style="transition-delay: 200ms;">
+                    Consistent. Committed. Connected.
+                </p>
+                <div class="max-w-5xl mx-auto bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6 mb-8 scroll-animate" style="transition-delay: 400ms;">
+                    <div class="flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-slate-700 text-slate-300">
+                        <div class="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 md:py-0">
+                             <span>+91 9431007867 | +91 7283007086</span>
+                        </div>
+                        <div class="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 md:py-0">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                             <span>info@hindustanprimeoverseas.com</span>
+                        </div>
+                        <div class="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 md:py-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                             <span>www.hindustanprimeoverseas.com</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto scroll-animate" style="transition-delay: 600ms;">
+                    Your Trusted Partner in Global Trade
+                </p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Welcome to Hindustan Prime Overseas</h2>
+                    <p class="text-slate-400 mt-2 max-w-3xl mx-auto">At Hindustan Prime Overseas, we are more than just a trading company – we are your trusted global partner. We specialize in Manufacturing, Trading, Import, Export, and E-Marketing of a diverse range of products.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="scroll-animate" style="transition-delay: 200ms;">
+                        <canvas id="trade-canvas"></canvas>
+                    </div>
+                    <div class="scroll-animate" style="transition-delay: 400ms;">
+                        <h3 class="text-2xl font-semibold text-white mb-4">Our strength lies in:</h3>
+                        <ul class="space-y-4 text-slate-300">
+                            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-400 h-6 w-6 flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Premium Quality Products:</strong>&nbsp;Sourcing and delivering only the best for our clients.</span></li>
+                            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-400 h-6 w-6 flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Timely & Reliable Delivery:</strong>&nbsp;A robust logistics network ensuring your goods arrive on schedule.</span></li>
+                            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-400 h-6 w-6 flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Trusted Global Partnerships:</strong>&nbsp;We build and maintain strong relationships worldwide.</span></li>
+                            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-400 h-6 w-6 flex-shrink-0 mt-1"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Long-Term Trust & Transparency:</strong>&nbsp;The foundation of our business is integrity and openness.</span></li>
+                        </ul>
+                         <p class="text-slate-400 mt-6">With years of experience, we have built a reputation for integrity, quality, and consistency in international markets.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision/Mission Section -->
+        <section id="values" class="py-20 md:py-32 bg-slate-900/50 section-glow">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Our Vision, Mission & Core Values</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Vision Card -->
+                    <div class="card-glow p-8 rounded-xl scroll-animate">
+                        <h3 class="text-2xl font-semibold text-white mb-3">Vision</h3>
+                        <p class="text-slate-400">To be a globally recognized leader in international trade, connecting India’s finest products with markets worldwide.</p>
+                    </div>
+                     <!-- Mission Card -->
+                    <div class="card-glow p-8 rounded-xl scroll-animate" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-semibold text-white mb-3">Mission</h3>
+                         <ul class="space-y-2 text-slate-400">
+                            <li class="flex gap-2"><span>•</span> To deliver premium-quality products at competitive prices.</li>
+                            <li class="flex gap-2"><span>•</span> To build long-term partnerships based on trust and reliability.</li>
+                            <li class="flex gap-2"><span>•</span> To ensure sustainable, ethical, and responsible business practices.</li>
+                        </ul>
+                    </div>
+                     <!-- Core Values Card -->
+                    <div class="card-glow p-8 rounded-xl scroll-animate" style="transition-delay: 400ms;">
+                        <h3 class="text-2xl font-semibold text-white mb-3">Core Values</h3>
+                         <ul class="space-y-2 text-slate-400">
+                           <li class="flex items-center gap-2">✅ Integrity & Transparency</li>
+                           <li class="flex items-center gap-2">✅ Quality First Approach</li>
+                           <li class="flex items-center gap-2">✅ Customer-Centric Service</li>
+                           <li class="flex items-center gap-2">✅ Trust as the Foundation</li>
+                           <li class="flex items-center gap-2">✅ Global Connectivity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Our Products</h2>
+                    <p class="text-slate-400 mt-2">A diverse portfolio to meet global demands.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Product Card 1 -->
+                    <div class="card-glow p-8 rounded-xl scroll-animate">
+                        <h3 class="text-2xl font-semibold text-white mb-3">🌿 Spices & Herbs</h3>
+                        <ul class="text-slate-400 list-disc list-outside space-y-1 pl-5">
+                            <li>Chilli, Turmeric, Cumin</li>
+                            <li>Coriander, Fenugreek</li>
+                            <li>Mustard Seeds</li>
+                            <li>Garlic, Onion, Spice Mixes</li>
+                        </ul>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="card-glow p-8 rounded-xl scroll-animate" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-semibold text-white mb-3">☕ Beverages</h3>
+                        <ul class="text-slate-400 list-disc list-outside space-y-1 pl-5">
+                            <li>Premium Tea</li>
+                            <li>Coffee Beans & Powder</li>
+                        </ul>
+                    </div>
+                    <!-- Product Card 3 -->
+                    <div class="card-glow p-8 rounded-xl scroll-animate" style="transition-delay: 400ms;">
+                        <h3 class="text-2xl font-semibold text-white mb-3">🥗 Food Products</h3>
+                         <ul class="text-slate-400 list-disc list-outside space-y-1 pl-5">
+                            <li>Pulses (Lentils, Beans)</li>
+                            <li>Sugar & Coconut Products</li>
+                            <li>Processed Foods</li>
+                        </ul>
+                    </div>
+                     <!-- Product Card 4 -->
+                    <div class="card-glow p-8 rounded-xl scroll-animate" style="transition-delay: 600ms;">
+                        <h3 class="text-2xl font-semibold text-white mb-3">🛢️ Industrial Packaging</h3>
+                         <ul class="text-slate-400 list-disc list-outside space-y-1 pl-5">
+                            <li>HDPE Blue Drums</li>
+                            <li>200L, 220L, 260L</li>
+                            <li>Custom industrial use</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-12 scroll-animate">
+                    <p class="text-slate-400">📥 Download Product Catalog (Available on Request)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="py-20 md:py-32 bg-slate-900/50 section-glow">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Why Choose Hindustan Prime Overseas?</h2>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <div class="scroll-animate flex items-start gap-3"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Global Import & Export Expertise:</strong> Decades of experience in international trade.</p></div>
+                    <div class="scroll-animate flex items-start gap-3" style="transition-delay: 100ms;"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Fast & Reliable Delivery:</strong> Strong logistics network to meet tight deadlines.</p></div>
+                    <div class="scroll-animate flex items-start gap-3" style="transition-delay: 200ms;"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Premium Quality Products:</strong> Strict quality control at every stage.</p></div>
+                    <div class="scroll-animate flex items-start gap-3" style="transition-delay: 300ms;"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Wide Product Portfolio:</strong> Agro, food, and industrial products under one brand.</p></div>
+                    <div class="scroll-animate flex items-start gap-3" style="transition-delay: 400ms;"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Long-Term Partnerships:</strong> We believe in trust as the foundation of every relationship.</p></div>
+                    <div class="scroll-animate flex items-start gap-3" style="transition-delay: 500ms;"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Competitive Pricing:</strong> Delivering value without compromising on quality.</p></div>
+                    <div class="scroll-animate flex items-start gap-3" style="transition-delay: 600ms;"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Sustainability & Responsibility:</strong> Ethical sourcing and eco-friendly practices.</p></div>
+                    <div class="scroll-animate flex items-start gap-3" style="transition-delay: 700ms;"><span class="text-violet-400 text-2xl">✅</span><p class="text-slate-300"><strong class="text-white">Trust & Transparency:</strong> Open communication and honest dealings with every client.</p></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <div class="scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Global Presence & Contact Us</h2>
+                    <p class="text-slate-400 mt-2">We proudly serve clients across the globe.</p>
+                </div>
+                <div class="flex justify-center gap-6 md:gap-8 my-8 text-lg text-slate-300 flex-wrap scroll-animate" style="transition-delay: 200ms;">
+                    <span>🌍 Middle East</span>
+                    <span>🌍 Asia-Pacific</span>
+                    <span>🌍 Africa</span>
+                    <span>🌍 Expanding into Europe & N. America</span>
+                </div>
+                <div class="max-w-2xl mx-auto bg-slate-900/50 border border-slate-700 rounded-xl p-8 mt-12 scroll-animate" style="transition-delay: 400ms;">
+                    <p class="text-slate-300 mb-6">With 24/7 dedicated support, we ensure smooth global trade and client satisfaction.</p>
+                    <div class="space-y-4 text-lg">
+                        <p class="text-slate-300">📧 <a href="mailto:info@hindustanprimeoverseas.com" class="contact-link">info@hindustanprimeoverseas.com</a></p>
+                        <p class="text-slate-300">📞 <a href="tel:+919431007867" class="contact-link">+91 9431007867</a> | <a href="tel:+917283007086" class="contact-link">+91 7283007086</a></p>
+                        <p class="text-slate-300">🌐 <a href="http://www.hindustanprimeoverseas.com" target="_blank" class="contact-link">www.hindustanprimeoverseas.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/50 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <p class="mb-2 font-semibold text-lg text-white">Hindustan Prime Overseas</p>
+            <p class="mb-4">Consistent. Committed. Connected.</p>
+            <p>&copy; 2025 Hindustan Prime Overseas. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 3D Globe Animation ---
+        let scene, camera, renderer, globe, particles;
+
+        function init3D() {
+            const canvas = document.getElementById('globe-canvas');
+            if (!canvas) return;
+            const container = canvas.parentElement;
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const globeGeometry = new THREE.SphereGeometry(2, 40, 40);
+            const globeMaterial = new THREE.PointsMaterial({ color: 0xa78bfa, size: 0.03 });
+            globe = new THREE.Points(globeGeometry, globeMaterial);
+            scene.add(globe);
+            
+            const particleGeometry = new THREE.BufferGeometry;
+            const particleCount = 2000;
+            const posArray = new Float32Array(particleCount * 3);
+            for(let i = 0; i < particleCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+            }
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.005 });
+            particles = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particles);
+
+            animate3D();
+        }
+
+        function animate3D() {
+            if (!globe) return;
+            requestAnimationFrame(animate3D);
+            globe.rotation.y += 0.001;
+            particles.rotation.y -= 0.0005;
+            renderer.render(scene, camera);
+        }
+
+        // --- 3D Trade Box Animation ---
+        let tradeScene, tradeCamera, tradeRenderer, tradeBox;
+
+        function initTrade3D() {
+            const canvas = document.getElementById('trade-canvas');
+            if (!canvas) return;
+            const container = canvas.parentElement;
+
+            tradeScene = new THREE.Scene();
+            tradeCamera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            tradeCamera.position.z = 4;
+            
+            tradeRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            tradeRenderer.setSize(container.clientWidth, container.clientHeight);
+            tradeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const boxGeometry = new THREE.BoxGeometry(2, 2, 2);
+            const wireframeMaterial = new THREE.MeshBasicMaterial({ color: 0xa78bfa, wireframe: true });
+            tradeBox = new THREE.Mesh(boxGeometry, wireframeMaterial);
+            tradeScene.add(tradeBox);
+
+            animateTrade3D();
+        }
+
+        function animateTrade3D() {
+            if (!tradeBox) return;
+            requestAnimationFrame(animateTrade3D);
+            tradeBox.rotation.x += 0.002;
+            tradeBox.rotation.y += 0.002;
+            tradeRenderer.render(tradeScene, tradeCamera);
+        }
+
+
+        // --- Global Resize Handler ---
+        function onWindowResize() {
+            // Globe
+            const globeCanvas = document.getElementById('globe-canvas');
+            if(globeCanvas && camera) {
+                const globeContainer = globeCanvas.parentElement;
+                camera.aspect = globeContainer.clientWidth / globeContainer.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(globeContainer.clientWidth, globeContainer.clientHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            }
+
+            // Trade Box
+            const tradeCanvas = document.getElementById('trade-canvas');
+            if (tradeCanvas && tradeCamera) {
+                const tradeContainer = tradeCanvas.parentElement;
+                tradeCamera.aspect = tradeContainer.clientWidth / tradeContainer.clientHeight;
+                tradeCamera.updateProjectionMatrix();
+                tradeRenderer.setSize(tradeContainer.clientWidth, tradeContainer.clientHeight);
+                tradeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            }
+        }
+        window.addEventListener('resize', onWindowResize);
+        
+        // --- Initial Load ---
+        window.onload = function() {
+            init3D();
+            initTrade3D();
+        };
+
+        // --- Scroll Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Mobile Menu ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                 mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
