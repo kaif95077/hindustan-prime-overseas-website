@@ -3,6 +3,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Leaf, Coffee, Drum, Star, Phone, Mail, ChevronRight, CheckCircle, Zap, Handshake, Globe, Package, Award, X } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Hindustan Prime Overseas | Global Trade Partner',
+  description: 'Your trusted partner in global trade. Specializing in spices, herbs, food products, and industrial packaging. Consistent. Committed. Connected.',
+};
 
 // 3D Globe Animation Component
 const GlobeCanvas = () => {
@@ -142,8 +148,8 @@ const EmailPopup = ({ isOpen, onClose }) => {
 };
 
 
-// Main App Component
-export default function HindustanPrimePage() {
+// Main Page Component for Next.js
+export default function Page() {
     const [isEmailModalOpen, setEmailModalOpen] = useState(false);
 
     const handleSmoothScroll = (e) => {
@@ -429,5 +435,4 @@ export default function HindustanPrimePage() {
         </div>
     );
 }
-
 
